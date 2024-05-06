@@ -1,18 +1,14 @@
 import { create } from "zustand";
 import { devtools } from "zustand/middleware";
+import { setAlarmState } from "./alarm";
 
-const createPlantSlice = () => ({
-  bananas: 13
-})
-
-const createAnimalSlice = (set) => ({
-  bears: 22,
-  addBear: () => set((state) => ({
-    animalStore: { ...state.animalStore, bears: state.animalStore.bears + 1 }
-  }))
+const createAlarmSlice = (set) => ({
+  alarmState: "ON",
+  alarmStateMessage: "off",
+  interval: 15,
+  setAlarmState: () => setAlarmState(set)
 })
 
 export const store = create(devtools((set) => ({
-  plantStore: createPlantSlice(),
-  animalStore: createAnimalSlice(set)
+  alarmStore: createAlarmSlice(set)
 })))
