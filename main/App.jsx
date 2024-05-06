@@ -2,7 +2,7 @@ import { store } from '../src/store/store'
 import './App.css'
 
 export const App = () => {
-  const { plantStore, animalStore } = store()
+  const { animalStore } = store()
 
   return (
     <div className="App">
