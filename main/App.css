@@ -4,3 +4,35 @@
   color: gray;
   background-color: #141325;
 }
+
+/* COMPONENTS */
+.main-component {
+  width: 100%;
+  border: 1px solid white;
+  border-radius: 1rem;
+  padding: 0.7rem;
+  background-color: black;
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+}
+
+.secondary-component {
+  padding: 0.3rem;
+}
+
+.header {
+  display: flex;
+}
+
+.button {
+  border: 1px solid gray;
+  border-radius: 0.5rem;
+  padding: 0.2rem;
+  background-color: #262a15;
+  cursor: pointer;
+}
+
+.hide {
+  display: none;
+}
