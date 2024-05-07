@@ -4,24 +4,21 @@ import './Alarm.css'
 
 export const Alarm = () => {
   const { alarmStore, timeStore } = store()
-  const prevSecondRef = useRef(new Date().getSeconds())
+  const prevMinuteRef = useRef(new Date().getMinutes())
 
-  // update time each second, avoid updating more than necessary
-  // console.log("  Alarm was rendered")
-
-  useEffect(() => {
-    const intervalId = setInterval(() => {
-      const currentSecond = new Date().getSeconds()
-      if (prevSecondRef.current !== currentSecond) {
-        timeStore.updateTime()
-        prevSecondRef.current = currentSecond
-      }
-    }, 500)
-    return () => clearInterval(intervalId)
-  }, [timeStore.time.dateNum.m])
+  // update time each minute, avoid updating more than necessary
+  console.log("  Alarm was rendered")
 
   useEffect(() => {
     alarmStore.updateNextInterval()
+    const intervalId = setInterval(() => {
+      const currentMinute = new Date().getMinutes()
+      if (prevMinuteRef.current !== currentMinute) {
+        timeStore.updateTime()
+        prevMinuteRef.current = currentMinute
+      }
+    }, 1000)
+    return () => clearInterval(intervalId)
   }, [timeStore.time.dateNum.m])
 
   return (
