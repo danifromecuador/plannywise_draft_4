@@ -6,7 +6,9 @@ export const getTime = () => {
     M: date.getMonth() + 1,
     d: date.getDate(),
     h: date.getHours(),
+    // h: 1,
     m: date.getMinutes(),
+    // m: 30,
     s: date.getSeconds(),
     ms: date.getMilliseconds()
   }

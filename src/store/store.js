@@ -1,6 +1,6 @@
 import { create } from "zustand";
 import { devtools } from "zustand/middleware";
-import { setAlarmState } from "./alarm.js";
+import { interval, nextInterval, setAlarmState } from "./alarm.js";
 import { getTime, updateTime } from "./time.js";
 
 const createTimeSlice = (set) => ({
@@ -11,7 +11,8 @@ const createTimeSlice = (set) => ({
 const createAlarmSlice = (set) => ({
   alarmState: "ON",
   alarmStateMessage: "off",
-  interval: 15,
+  interval: interval,
+  nextInterval: nextInterval(),
   setAlarmState: () => setAlarmState(set)
 })
 
