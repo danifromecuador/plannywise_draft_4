@@ -17,7 +17,7 @@ export const Alarm = () => {
       }
     }, 1000)
     return () => clearInterval(intervalId)
-  }, [timeStore.time.dateNum.s])
+  }, [timeStore])
 
   return (
     <div className='Alarm main-component'>
