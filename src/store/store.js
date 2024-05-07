@@ -1,6 +1,12 @@
 import { create } from "zustand";
 import { devtools } from "zustand/middleware";
-import { setAlarmState } from "./alarm";
+import { setAlarmState } from "./alarm.js";
+import { getTime, updateTime } from "./time.js";
+
+const createTimeSlice = (set) => ({
+  time: getTime(),
+  updateTime: () => updateTime(set)
+})
 
 const createAlarmSlice = (set) => ({
   alarmState: "ON",
@@ -10,5 +16,6 @@ const createAlarmSlice = (set) => ({
 })
 
 export const store = create(devtools((set) => ({
-  alarmStore: createAlarmSlice(set)
+  alarmStore: createAlarmSlice(set),
+  timeStore: createTimeSlice(set)
 })))
