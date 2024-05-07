@@ -21,5 +21,15 @@ export const nextInterval = () => {
     h++
   }
   if (h === 24) h = 0
-  return { h, nextM }
+  return { h: h.toString().padStart(2, "0"), m: nextM.toString().padStart(2, "0") }
+}
+
+
+export const updateNextInterval = (set) => {
+  set((state)=>({
+    alarmStore: {
+      ...state.alarmStore,
+      nextInterval: nextInterval()
+    }
+  }))
 }

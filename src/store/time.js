@@ -8,7 +8,7 @@ export const getTime = () => {
     h: date.getHours(),
     // h: 1,
     m: date.getMinutes(),
-    // m: 30,
+    // m: 59,
     s: date.getSeconds(),
     ms: date.getMilliseconds()
   }

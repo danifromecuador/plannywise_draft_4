@@ -7,7 +7,8 @@ export const Alarm = () => {
   const prevSecondRef = useRef(new Date().getSeconds())
 
   // update time each second, avoid updating more than necessary
-  console.log(timeStore.time.dateNum.s + "  Alarm was rendered")
+  // console.log("  Alarm was rendered")
+
   useEffect(() => {
     const intervalId = setInterval(() => {
       const currentSecond = new Date().getSeconds()
@@ -15,9 +16,13 @@ export const Alarm = () => {
         timeStore.updateTime()
         prevSecondRef.current = currentSecond
       }
-    }, 1000)
+    }, 500)
     return () => clearInterval(intervalId)
-  }, [timeStore])
+  }, [timeStore.time.dateNum.m])
+
+  useEffect(() => {
+    alarmStore.updateNextInterval()
+  }, [timeStore.time.dateNum.m])
 
   return (
     <div className='Alarm main-component'>
@@ -30,10 +35,10 @@ export const Alarm = () => {
       </div>
       <div>
         <p>Alarm will sound every {alarmStore.interval} minutes</p>
-        <p>{timeStore.time.dateStr.h}:{timeStore.time.dateStr.m}:{timeStore.time.dateStr.s}</p>
+        <p>{timeStore.time.dateStr.h}:{timeStore.time.dateStr.m}</p>
       </div>
       <div>
-        <p>Next alarm will sound at 17:15</p>
+        <p>Next alarm will sound at {alarmStore.nextInterval.h}:{alarmStore.nextInterval.m}</p>
         <p className='hide'>Alarm is playing right now</p>
         <p className='hide'>Can&apos;t you hear the alarm? Click here</p>
       </div>
