@@ -1,18 +1,23 @@
 import { create } from "zustand";
 import { devtools } from "zustand/middleware";
+import { interval, nextInterval, updateNextInterval, setAlarmState } from "./alarm.js";
+import { getTime, updateTime } from "./time.js";
 
-const createPlantSlice = () => ({
-  bananas: 13
+const createTimeSlice = (set) => ({
+  time: getTime(),
+  updateTime: () => updateTime(set)
 })
 
-const createAnimalSlice = (set) => ({
-  bears: 22,
-  addBear: () => set((state) => ({
-    animalStore: { ...state.animalStore, bears: state.animalStore.bears + 1 }
-  }))
+const createAlarmSlice = (set) => ({
+  alarmState: "ON",
+  alarmStateMessage: "off",
+  interval: interval,
+  nextInterval: nextInterval(),
+  updateNextInterval: () => updateNextInterval(set),
+  setAlarmState: () => setAlarmState(set)
 })
 
 export const store = create(devtools((set) => ({
-  plantStore: createPlantSlice(),
-  animalStore: createAnimalSlice(set)
+  alarmStore: createAlarmSlice(set),
+  timeStore: createTimeSlice(set)
 })))
