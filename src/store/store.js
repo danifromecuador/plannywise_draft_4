@@ -4,8 +4,6 @@ import { interval, nextInterval, updateNextInterval, setState } from "./alarm.js
 import { getDateNum, getDateStr, updateTime } from "./time.js";
 
 const createTimeSlice = (set) => ({
-  // getTime: getTime(),
-  // updateTime: () => updateTime(set)
   num: getDateNum(),
   str: getDateStr(),
   updateTime: () => updateTime(set)
