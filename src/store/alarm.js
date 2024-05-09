@@ -1,19 +1,19 @@
-import { getTime } from "./time.js"
+import { getDateNum } from "./time.js"
 
 export const interval = 15
 
-export const setAlarmState = (set) => {
+export const setState = (set) => {
   set((state) => ({
-    alarmStore: {
-      ...state.alarmStore,
-      alarmState: state.alarmStore.alarmState === "ON" ? "OFF" : "ON",
-      alarmStateMessage: state.alarmStore.alarmStateMessage === "off" ? "on" : "off"
+    alarm: {
+      ...state.alarm,
+      state: state.alarm.state === "ON" ? "OFF" : "ON",
+      stateMessage: state.alarm.stateMessage === "off" ? "on" : "off"
     }
   }))
 }
 
 export const nextInterval = () => {
-  let { h, m } = getTime().dateNum
+  let { h, m } = getDateNum()
   let nextM = 0
   nextM = (Math.floor(m / interval) + 1) * interval
   if (nextM === 60) {
@@ -26,9 +26,9 @@ export const nextInterval = () => {
 
 
 export const updateNextInterval = (set) => {
-  set((state)=>({
-    alarmStore: {
-      ...state.alarmStore,
+  set((state) => ({
+    alarm: {
+      ...state.alarm,
       nextInterval: nextInterval()
     }
   }))
