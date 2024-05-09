@@ -6,13 +6,13 @@ import './Alarm.css'
 
 export const Alarm = () => {
   const { alarmStore, timeStore } = store()
-  const audio = new Audio(alarmSound)
   const prevMinuteRef = useRef(new Date().getMinutes())
   const [hide1, setHide1] = useState("")
   const [hide2, setHide2] = useState("hide")
   const [hide3, setHide3] = useState("")
 
   useEffect(() => {
+    const audio = new Audio(alarmSound)
     alarmStore.updateNextInterval()
     const intervalId = setInterval(() => {
       const currentMinute = new Date().getMinutes()
@@ -31,7 +31,7 @@ export const Alarm = () => {
       }
     }, 1000)
     return () => clearInterval(intervalId)
-  }, [timeStore.time.dateNum.m])
+  }, [timeStore.time.dateNum.m, alarmStore, timeStore])
 
   useEffect(() => {
     if (alarmStore.alarmState === "OFF") setHide3("hide")

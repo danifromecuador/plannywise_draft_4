@@ -5,7 +5,8 @@
   background-color: #141325;
 }
 
-ul, li {
+ul,
+li {
   list-style: none;
 }
 
@@ -41,7 +42,6 @@ ul, li {
 .hide {
   display: none;
 }
-
 
 @media (width <= 480px) {
   * {
