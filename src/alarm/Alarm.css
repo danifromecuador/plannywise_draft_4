@@ -4,7 +4,6 @@
   column-gap: 0.5rem;
 }
 
-.Alarm.main-component > div:first-child > div:first-child {
-  font-size: 3rem;
-  cursor: pointer;
+.Alarm.main-component > div:first-child .button {
+  min-width: 130px;
 }
