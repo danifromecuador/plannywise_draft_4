@@ -31,7 +31,7 @@ export const Alarm = () => {
       }
     }, 1000)
     return () => clearInterval(intervalId)
-  }, [timeStore.time.dateNum.m, alarmStore, timeStore])
+  }, [timeStore.time.dateNum.m])
 
   useEffect(() => {
     if (alarmStore.alarmState === "OFF") setHide3("hide")
