@@ -15,8 +15,8 @@ export const getDateNum = () => {
 
 export const getDateStr = () => ({
   y: getDateNum().y.toString(),
-  M: getDateNum().M.toString(),
-  d: getDateNum().d.toString(),
+  M: getDateNum().M.toString().padStart(2, "0"),
+  d: getDateNum().d.toString().padStart(2, "0"),
   h: getDateNum().h.toString().padStart(2, "0"),
   m: getDateNum().m.toString().padStart(2, "0"),
   s: getDateNum().s.toString().padStart(2, "0"),
