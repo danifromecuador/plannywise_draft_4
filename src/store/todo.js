@@ -1,20 +1,15 @@
-export const daily = () => {
-  return {
-    todos: ["dt a", "dt b", "dt c"],
-    dones: ["dd e", "dd f"]
-  }
-}
+import { getDateStr } from "./time"
 
-export const weekly = () => {
-  return {
-    todos: ["wt a", "wt b", "wt c"],
-    dones: ["wd e", "wd f"]
+export const dailyAddTodo = (set, input) => {
+  const todo = {
+    index: parseInt(Object.values(getDateStr()).join("")),
+    content: input,
+    completed: "false"
   }
-}
-
-export const monthly = () => {
-  return {
-    todos: ["mt a", "mt b", "mt c"],
-    dones: ["md e", "md f"]
-  }
+  set((state) => ({
+    daily: {
+      ...state.daily,
+      todos: [...state.daily.todos, todo]
+    }
+  }))
 }
