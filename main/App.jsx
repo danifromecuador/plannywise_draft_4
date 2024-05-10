@@ -8,9 +8,9 @@ export const App = () => {
     <div className="App">
       <Alarm />
       <div className="Todo">
-        <Todo type="daily" storeLocal={Store().todo.daily}/>
-        <Todo type="weekly" storeLocal={Store().todo.weekly} />
-        <Todo type="monthly" storeLocal={Store().todo.monthly} />
+        <Todo type="daily" storeLocal={Store().daily}/>
+        <Todo type="weekly" storeLocal={Store().weekly} />
+        <Todo type="monthly" storeLocal={Store().monthly} />
       </div>
     </div>
   )

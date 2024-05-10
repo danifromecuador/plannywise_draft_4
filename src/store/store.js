@@ -2,7 +2,7 @@ import { create } from "zustand"
 import { devtools } from "zustand/middleware"
 import { getDateNum, getDateStr, updateTime } from "./time.js"
 import { interval, nextInterval, updateNextInterval, setState } from "./alarm.js"
-import { daily, weekly, monthly } from "./todo.js"
+import { dailyAddTodo } from "./todo.js"
 
 const createTimeSlice = (set) => ({
   num: getDateNum(),
@@ -19,14 +19,31 @@ const createAlarmSlice = (set) => ({
   setState: () => setState(set)
 })
 
-const createTodoSlice = () => ({
-  daily: daily(),
-  weekly: weekly(),
-  monthly: monthly()
+const createDailyTodoSlice = (set) => ({
+  todos: [],
+  dones: [],
+  addTodo: (input) => dailyAddTodo(set, input),
+  markTodoAsDone: () => dailyMarkTodoAsDone(set)
+})
+
+const createWeeklyTodoSlice = (set) => ({
+  todos: [],
+  dones: [],
+  addTodo: () => weeklyAddTodo(set),
+  markTodoAsDone: () => weeklyMarkTodoAsDone(set)
+})
+
+const createMonthlyTodoSlice = (set) => ({
+  todos: [],
+  dones: [],
+  addTodo: () => monthlyAddTodo(set),
+  markTodoAsDone: () => monthlyMarkTodoAsDone(set)
 })
 
 export const Store = create(devtools((set) => ({
   alarm: createAlarmSlice(set),
   time: createTimeSlice(set),
-  todo: createTodoSlice()
+  daily: createDailyTodoSlice(set),
+  weekly: createWeeklyTodoSlice(set),
+  monthly: createMonthlyTodoSlice(set),
 })))
