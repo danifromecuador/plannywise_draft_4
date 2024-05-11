@@ -13,3 +13,8 @@ export const dailyAddTodo = (set, input) => {
     }
   }))
 }
+
+export const dailyMarkTodoAsDone = (set, index) => {
+  console.log(index);
+  
+}

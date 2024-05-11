@@ -2,7 +2,7 @@ import { create } from "zustand"
 import { devtools } from "zustand/middleware"
 import { getDateNum, getDateStr, updateTime } from "./time.js"
 import { interval, nextInterval, updateNextInterval, setState } from "./alarm.js"
-import { dailyAddTodo } from "./todo.js"
+import { dailyAddTodo, dailyMarkTodoAsDone } from "./todo.js"
 
 const createTimeSlice = (set) => ({
   num: getDateNum(),
@@ -20,10 +20,10 @@ const createAlarmSlice = (set) => ({
 })
 
 const createDailyTodoSlice = (set) => ({
-  todos: [],
+  todos: JSON.parse(localStorage.getItem("dailyTodos")) || [],
   dones: [],
   addTodo: (input) => dailyAddTodo(set, input),
-  markTodoAsDone: () => dailyMarkTodoAsDone(set)
+  markTodoAsDone: (index) => dailyMarkTodoAsDone(set, index)
 })
 
 const createWeeklyTodoSlice = (set) => ({

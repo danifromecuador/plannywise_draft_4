@@ -1,4 +1,5 @@
 import { useState, useEffect } from 'react'
+import { Store } from '../store/store'
 import './Todo.css'
 
 export const Todo = ({ type, storeLocal }) => {
@@ -9,25 +10,33 @@ export const Todo = ({ type, storeLocal }) => {
 
   const handleEnter = (e) => {
     if (e.key === "Enter") {
-      console.log("send data to store");
       storeLocal.addTodo(input)
       setInput("")
     }
   }
 
   useEffect(() => {
-    console.log(storeLocal.todos);
+    localStorage.setItem("dailyTodos", JSON.stringify(Store.getState().daily.todos))
   }, [storeLocal])
 
   return (
     <div className='Todo'>
       <h1>{type.charAt(0).toUpperCase() + type.slice(1)} Goals</h1>
       <ul>
-        {storeLocal.todos.map(element => (
-          <li key={element.index}>{element.content}</li>
+        {storeLocal.todos.map(e => (
+          <li
+            key={e.index}
+            onClick={() => storeLocal.markTodoAsDone(e.index)}
+          >
+            {e.content}
+          </li>
         ))}
-        {storeLocal.dones.map(element => (
-          <li key={element.index}>{element.content}</li>
+        {storeLocal.dones.map(e => (
+          <li
+            key={e.index}
+          >
+            {e.content}
+          </li>
         ))}
       </ul>
       <div>
