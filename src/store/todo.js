@@ -3,8 +3,7 @@ import { getDateStr } from "./time"
 export const dailyAddTodo = (set, input) => {
   const todo = {
     index: parseInt(Object.values(getDateStr()).join("")),
-    content: input,
-    completed: "false"
+    content: input
   }
   set((state) => ({
     daily: {
@@ -14,7 +13,14 @@ export const dailyAddTodo = (set, input) => {
   }))
 }
 
-export const dailyMarkTodoAsDone = (set, index) => {
-  console.log(index);
-  
+export const dailyMarkTodoAsDone = (set, element) => {
+  const dailyTodos = JSON.parse(localStorage.getItem("dailyTodos"))
+  const newDailyTodos = dailyTodos.filter(e => e.index !== element.index)
+  set((state) => ({
+    daily: {
+      ...state.daily,
+      todos: newDailyTodos,
+      dones: [...state.daily.dones, element]
+    }
+  }))
 }

@@ -23,7 +23,7 @@ const createDailyTodoSlice = (set) => ({
   todos: JSON.parse(localStorage.getItem("dailyTodos")) || [],
   dones: [],
   addTodo: (input) => dailyAddTodo(set, input),
-  markTodoAsDone: (index) => dailyMarkTodoAsDone(set, index)
+  markTodoAsDone: (element) => dailyMarkTodoAsDone(set, element)
 })
 
 const createWeeklyTodoSlice = (set) => ({

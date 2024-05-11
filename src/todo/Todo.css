@@ -1,3 +1,7 @@
-.Todo {
-  color: red;
+.Todo .todos {
+  color: gray;
+}
+
+.Todo .dones {
+  color: rgb(58, 58, 58);
 }
