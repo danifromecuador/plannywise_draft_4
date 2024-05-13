@@ -4,9 +4,16 @@ import './Todo.css'
 
 export const Todo = ({ type, storeLocal }) => {
   const [input, setInput] = useState("")
-  const handleEnter = e => e.key === "Enter" ? (storeLocal.addTodo(input), setInput("")) : null
-  useEffect(() => { localStorage.setItem("dailyTodos", JSON.stringify(Store.getState().daily.todos)) }, [storeLocal.todos])
-  useEffect(() => { localStorage.setItem("dailyDones", JSON.stringify(Store.getState().daily.dones)) }, [storeLocal.dones])
+  const handleEnter = e => e.key === "Enter" && (storeLocal.addTodo(input), setInput(""))
+
+  useEffect(() => {
+    localStorage.setItem("dailyTodos", JSON.stringify(Store.getState().daily.todos))
+    localStorage.setItem("dailyDones", JSON.stringify(Store.getState().daily.dones))
+    localStorage.setItem("weeklyTodos", JSON.stringify(Store.getState().weekly.todos))
+    localStorage.setItem("weeklyDones", JSON.stringify(Store.getState().weekly.dones))
+    localStorage.setItem("monthlyTodos", JSON.stringify(Store.getState().monthly.todos))
+    localStorage.setItem("monthlyDones", JSON.stringify(Store.getState().monthly.dones))
+  }, [storeLocal])
 
   return (
     <div className='Todo'>
