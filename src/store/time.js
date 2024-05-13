@@ -23,6 +23,10 @@ export const getDateStr = () => ({
   ms: getDateNum().ms.toString().padStart(3, "0")
 })
 
+export const Index = () => parseInt(
+  getDateStr().y + getDateStr().M + getDateStr().d + getDateStr().h + getDateStr().m + getDateStr().s + getDateStr().ms
+)
+
 export const updateTime = (set) => {
   set((state) => ({
     time: {
