@@ -5,3 +5,7 @@
 .Todo .dones {
   color: rgb(58, 58, 58);
 }
+
+.Todo ul li {
+  cursor: pointer;
+}

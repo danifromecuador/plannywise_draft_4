@@ -1,26 +1,31 @@
-import { getDateStr } from "./time"
+import { Index } from "./time"
 
 export const dailyAddTodo = (set, input) => {
-  const todo = {
-    index: parseInt(Object.values(getDateStr()).join("")),
-    content: input
-  }
   set((state) => ({
     daily: {
       ...state.daily,
-      todos: [...state.daily.todos, todo]
+      todos: [...state.daily.todos, { index: Index(), content: input }]
     }
   }))
 }
 
 export const dailyMarkTodoAsDone = (set, element) => {
-  const dailyTodos = JSON.parse(localStorage.getItem("dailyTodos"))
-  const newDailyTodos = dailyTodos.filter(e => e.index !== element.index)
   set((state) => ({
     daily: {
       ...state.daily,
-      todos: newDailyTodos,
-      dones: [...state.daily.dones, element]
+      todos: [...state.daily.todos.filter(e => e.index !== element.index)],
+      dones: ([...state.daily.dones, element]).sort((a, b) => a.index - b.index)
     }
   }))
 }
+
+export const dailyMarkDoneAsTodo = (set, element) => {
+  set((state) => ({
+    daily: {
+      ...state.daily,
+      todos: ([...state.daily.todos, element]).sort((a, b) => a.index - b.index),
+      dones: [...state.daily.dones.filter(e => e.index !== element.index)]
+    }
+  }))
+}
+

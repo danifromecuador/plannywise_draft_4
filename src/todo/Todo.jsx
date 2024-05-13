@@ -5,7 +5,8 @@ import './Todo.css'
 export const Todo = ({ type, storeLocal }) => {
   const [input, setInput] = useState("")
   const handleEnter = e => e.key === "Enter" ? (storeLocal.addTodo(input), setInput("")) : null
-  useEffect(() => { localStorage.setItem("dailyTodos", JSON.stringify(Store.getState().daily.todos)) }, [storeLocal])
+  useEffect(() => { localStorage.setItem("dailyTodos", JSON.stringify(Store.getState().daily.todos)) }, [storeLocal.todos])
+  useEffect(() => { localStorage.setItem("dailyDones", JSON.stringify(Store.getState().daily.dones)) }, [storeLocal.dones])
 
   return (
     <div className='Todo'>
@@ -17,7 +18,7 @@ export const Todo = ({ type, storeLocal }) => {
       </ul>
       <ul className='dones'>
         {storeLocal.dones.map(e => (
-          <li key={e.index}>{e.content}</li>
+          <li key={e.index} onClick={()=>storeLocal.markDoneAsTodo(e)}>{e.content}</li>
         ))}
       </ul>
       <div>
