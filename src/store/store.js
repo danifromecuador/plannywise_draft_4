@@ -2,7 +2,11 @@ import { create } from "zustand"
 import { devtools } from "zustand/middleware"
 import { getDateNum, getDateStr, updateTime } from "./time.js"
 import { interval, nextInterval, updateNextInterval, setState } from "./alarm.js"
-import { dailyAddTodo, dailyMarkTodoAsDone, dailyMarkDoneAsTodo } from "./todo.js"
+import { 
+  dailyAddTodo, dailyMarkTodoAsDone, dailyMarkDoneAsTodo,
+  weeklyAddTodo, weeklyMarkTodoAsDone, weeklyMarkDoneAsTodo,
+  monthlyAddTodo, monthlyMarkTodoAsDone, monthlyMarkDoneAsTodo,
+} from "./todo.js"
 
 const createTimeSlice = (set) => ({
   num: getDateNum(),
@@ -29,17 +33,22 @@ const createDailyTodoSlice = (set) => ({
 })
 
 const createWeeklyTodoSlice = (set) => ({
-  todos: [],
-  dones: [],
-  addTodo: () => weeklyAddTodo(set),
-  markTodoAsDone: () => weeklyMarkTodoAsDone(set)
+  todos: JSON.parse(localStorage.getItem("weeklyTodos")) || [],
+  dones: JSON.parse(localStorage.getItem("weeklyDones")) || [],
+  addTodo: (input) => weeklyAddTodo(set, input),
+  markTodoAsDone: (element) => weeklyMarkTodoAsDone(set, element),
+  markDoneAsTodo: (element) => weeklyMarkDoneAsTodo(set, element),
+  removeAllCompleted: () => set((state)=>({weekly:{...state.weekly, dones:[]}}))
+  
 })
 
 const createMonthlyTodoSlice = (set) => ({
-  todos: [],
-  dones: [],
-  addTodo: () => monthlyAddTodo(set),
-  markTodoAsDone: () => monthlyMarkTodoAsDone(set)
+  todos: JSON.parse(localStorage.getItem("monthlyTodos")) || [],
+  dones: JSON.parse(localStorage.getItem("monthlyDones")) || [],
+  addTodo: (input) => monthlyAddTodo(set, input),
+  markTodoAsDone: (element) => monthlyMarkTodoAsDone(set, element),
+  markDoneAsTodo: (element) => monthlyMarkDoneAsTodo(set, element),
+  removeAllCompleted: () => set((state)=>({monthly:{...state.monthly, dones:[]}}))
 })
 
 export const Store = create(devtools((set) => ({

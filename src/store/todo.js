@@ -29,3 +29,60 @@ export const dailyMarkDoneAsTodo = (set, element) => {
   }))
 }
 
+export const weeklyAddTodo = (set, input) => {
+  set((state) => ({
+    weekly: {
+      ...state.weekly,
+      todos: [...state.weekly.todos, { index: Index(), content: input }]
+    }
+  }))
+}
+
+export const weeklyMarkTodoAsDone = (set, element) => {
+  set((state) => ({
+    weekly: {
+      ...state.weekly,
+      todos: [...state.weekly.todos.filter(e => e.index !== element.index)],
+      dones: ([...state.weekly.dones, element]).sort((a, b) => a.index - b.index)
+    }
+  }))
+}
+
+export const weeklyMarkDoneAsTodo = (set, element) => {
+  set((state) => ({
+    weekly: {
+      ...state.weekly,
+      todos: ([...state.weekly.todos, element]).sort((a, b) => a.index - b.index),
+      dones: [...state.weekly.dones.filter(e => e.index !== element.index)]
+    }
+  }))
+}
+
+export const monthlyAddTodo = (set, input) => {
+  set((state) => ({
+    monthly: {
+      ...state.monthly,
+      todos: [...state.monthly.todos, { index: Index(), content: input }]
+    }
+  }))
+}
+
+export const monthlyMarkTodoAsDone = (set, element) => {
+  set((state) => ({
+    monthly: {
+      ...state.monthly,
+      todos: [...state.monthly.todos.filter(e => e.index !== element.index)],
+      dones: ([...state.monthly.dones, element]).sort((a, b) => a.index - b.index)
+    }
+  }))
+}
+
+export const monthlyMarkDoneAsTodo = (set, element) => {
+  set((state) => ({
+    monthly: {
+      ...state.monthly,
+      todos: ([...state.monthly.todos, element]).sort((a, b) => a.index - b.index),
+      dones: [...state.monthly.dones.filter(e => e.index !== element.index)]
+    }
+  }))
+}
