@@ -18,11 +18,11 @@ export const Todo = ({ type, storeLocal }) => {
       </ul>
       <ul className='dones'>
         {storeLocal.dones.map(e => (
-          <li key={e.index} onClick={()=>storeLocal.markDoneAsTodo(e)}>{e.content}</li>
+          <li key={e.index} onClick={() => storeLocal.markDoneAsTodo(e)}>{e.content}</li>
         ))}
       </ul>
       <div>
-        <button>Remove All Completed</button>
+        <button onClick={() => storeLocal.removeAllCompleted()}>Remove All Completed</button>
         <input
           type="text"
           placeholder='Type a new goal and press Enter'

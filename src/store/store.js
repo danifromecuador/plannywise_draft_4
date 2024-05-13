@@ -24,7 +24,8 @@ const createDailyTodoSlice = (set) => ({
   dones: JSON.parse(localStorage.getItem("dailyDones")) || [],
   addTodo: (input) => dailyAddTodo(set, input),
   markTodoAsDone: (element) => dailyMarkTodoAsDone(set, element),
-  markDoneAsTodo: (element) => dailyMarkDoneAsTodo(set, element)
+  markDoneAsTodo: (element) => dailyMarkDoneAsTodo(set, element),
+  removeAllCompleted: () => set((state)=>({daily:{...state.daily, dones:[]}}))
 })
 
 const createWeeklyTodoSlice = (set) => ({
