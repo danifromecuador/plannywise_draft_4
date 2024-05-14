@@ -46,10 +46,6 @@
   border-radius: 0.5rem;
 }
 
-.header {
-  display: flex;
-}
-
 .button {
   border: 1px solid gray;
   border-radius: 0.5rem;
@@ -59,7 +55,7 @@
   color: gray;
 }
 
-/* HEADER START*/
+/* HEADER START */
 .header {
   width: 100%;
   display: flex;

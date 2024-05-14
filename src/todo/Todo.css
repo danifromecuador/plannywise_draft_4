@@ -3,9 +3,13 @@
   row-gap: 0.5rem;
 }
 
-
 .Todo ul {
   width: 100%;
+}
+
+.Todo ul li {
+  cursor: pointer;
+  padding: 1px;
 }
 
 .Todo li:hover {
@@ -16,13 +20,6 @@
 .Todo .dones {
   color: rgb(43, 43, 43);
 }
-
-.Todo ul li {
-  cursor: pointer;
-  padding: 1px;
-}
-
-
 
 .Todo .btn-input {
   width: 100%;

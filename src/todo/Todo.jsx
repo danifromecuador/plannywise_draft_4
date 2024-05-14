@@ -1,4 +1,5 @@
 import { useState, useEffect } from 'react'
+import PropTypes from "prop-types";
 import { Store } from '../store/store'
 import './Todo.css'
 
@@ -46,4 +47,9 @@ export const Todo = ({ type, storeLocal }) => {
       </div>
     </div>
   )
+}
+
+Todo.propTypes = {
+  type: PropTypes.string,
+  storeLocal: PropTypes.object
 }
