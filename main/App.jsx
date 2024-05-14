@@ -7,10 +7,13 @@ export const App = () => {
   return (
     <div className="App">
       <Alarm />
-      <div className="Todo">
-        <Todo type="daily" storeLocal={Store().daily}/>
-        <Todo type="weekly" storeLocal={Store().weekly} />
-        <Todo type="monthly" storeLocal={Store().monthly} />
+      <div className='left-right'>
+        <div className="left">
+          <Todo type="daily" storeLocal={Store().daily} />
+          <Todo type="weekly" storeLocal={Store().weekly} />
+          <Todo type="monthly" storeLocal={Store().monthly} />
+        </div>
+        <div className='right'>TASKS</div>
       </div>
     </div>
   )
