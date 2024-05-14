@@ -1,36 +1,38 @@
-export const getTime = () => {
+export const getDateNum = () => {
   const date = new Date()
-
-  const dateNum = {
+  return {
     y: date.getFullYear(),
     M: date.getMonth() + 1,
     d: date.getDate(),
     h: date.getHours(),
-    // h: 1,
+    // h: 23,
     m: date.getMinutes(),
-    // m: 59,
+    // m: 45,
     s: date.getSeconds(),
     ms: date.getMilliseconds()
   }
-
-  const dateStr = {
-    y: dateNum.y.toString(),
-    M: dateNum.M.toString(),
-    d: dateNum.d.toString(),
-    h: dateNum.h.toString().padStart(2, "0"),
-    m: dateNum.m.toString().padStart(2, "0"),
-    s: dateNum.s.toString().padStart(2, "0"),
-    ms: dateNum.ms.toString().padStart(3, "0")
-  }
-
-  return { dateNum, dateStr }
 }
+
+export const getDateStr = () => ({
+  y: getDateNum().y.toString(),
+  M: getDateNum().M.toString().padStart(2, "0"),
+  d: getDateNum().d.toString().padStart(2, "0"),
+  h: getDateNum().h.toString().padStart(2, "0"),
+  m: getDateNum().m.toString().padStart(2, "0"),
+  s: getDateNum().s.toString().padStart(2, "0"),
+  ms: getDateNum().ms.toString().padStart(3, "0")
+})
+
+export const Index = () => parseInt(
+  getDateStr().y + getDateStr().M + getDateStr().d + getDateStr().h + getDateStr().m + getDateStr().s + getDateStr().ms
+)
 
 export const updateTime = (set) => {
   set((state) => ({
-    timeStore: {
-      ...state.timeStore,
-      time: getTime()
+    time: {
+      ...state.time,
+      num: getDateNum(),
+      str: getDateStr()
     }
   }))
 }
