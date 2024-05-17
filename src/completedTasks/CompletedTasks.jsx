@@ -7,10 +7,25 @@ import './CompletedTasks.css'
 export const CompletedTasks = ({ storeLocal }) => {
   const [input, setInput] = useState("")
   const [hide1, setHide1] = useState("")
+  const [warn1, setWarn1] = useState("")
   const previousIntervalStr = `${previousInterval().hi}:${previousInterval().mi}  -  ${previousInterval().hf}:${previousInterval().mf}`
+  const lastCompletedTaskInterval = storeLocal.dones.length === 0 ? null : storeLocal.dones.at(-1).interval
   let doneSize = storeLocal.dones.length
   let workedHours = doneSize / 4
-  const handleEnter = e => e.key === "Enter" && input && input[0] !== " " && (storeLocal.addTodo(previousIntervalStr, input), setInput(""))
+
+  const handleEnter = e => {
+    if (e.key === "Enter") {
+      if (!input) setWarn1("Type something and then press Enter Key")
+      if (input && input[0] == " ") setWarn1("Avoid adding spaces at the start")
+      if (input && input[0] !== " " && previousIntervalStr === lastCompletedTaskInterval) setWarn1("Wait until next interval time to add a new completed task")
+      if (input && input[0] !== " " && previousIntervalStr !== lastCompletedTaskInterval) {
+        storeLocal.addTodo(previousIntervalStr, input)
+        setInput("")
+        setWarn1("Completed task was added sucessfully!")
+      }
+      setTimeout(() => setWarn1(""), 5000)
+    }
+  }
 
   useEffect(() => {
     localStorage.setItem("completedTasks", JSON.stringify(Store.getState().tasks.dones))
@@ -28,6 +43,7 @@ export const CompletedTasks = ({ storeLocal }) => {
           <li key={e.index} className='dones'>{e.interval} {"=>"} {e.content}</li>
         ))}
       </ul>
+      <div className="warn1">{warn1}</div>
       <div className={`btn-input ${hide1}`}>
         <button className='button' onClick={() => storeLocal.removeAllCompleted()}>Delete All Tasks</button>
         <div className='interval-input'>
