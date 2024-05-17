@@ -92,7 +92,7 @@
   display: none !important;
 }
 
-@media (width <=480px) {
+@media (width <= 480px) {
   * {
     font-size: 0.8rem !important;
   }
@@ -124,18 +124,15 @@
   .App .right {
     width: 100%;
   }
-
-
 }
 
-@media (480px <=width <=600px) {
+@media (480px <= width <= 600px) {
   .App .right .CompletedTasks.Todo.main-component .btn-input .interval-input.input {
     flex-direction: column;
   }
 }
 
-
-@media (1000px <=width < 1200px) {
+@media (1000px <= width < 1200px) {
   .App .right .CompletedTasks.Todo.main-component .btn-input .interval-input.input {
     flex-direction: column;
   }

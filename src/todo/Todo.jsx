@@ -1,6 +1,5 @@
 import { useState, useEffect } from 'react'
 import PropTypes from "prop-types";
-import { Store } from '../store/store'
 import './Todo.css'
 
 export const Todo = ({ type, storeLocal }) => {
