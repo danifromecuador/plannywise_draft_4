@@ -12,6 +12,24 @@ export const setState = (set) => {
   }))
 }
 
+export const previousInterval = () => {
+  let { h, m } = getDateNum()
+  let [hi, mi, hf, mf] = [h, 0, h, 0]
+  mf = m - m % 15
+  mi = mf - 15
+  if (mf === 0) {
+    mi = 45
+    hi -= 1
+    if (hf === 0) hi = 23
+  }
+  return {
+    hi: hi.toString().padStart(2, "0"),
+    mi: mi.toString().padStart(2, "0"),
+    hf: hf.toString().padStart(2, "0"),
+    mf: mf.toString().padStart(2, "0")
+  }
+}
+
 export const nextInterval = () => {
   let { h, m } = getDateNum()
   let nextM = 0
@@ -23,7 +41,6 @@ export const nextInterval = () => {
   if (h === 24) h = 0
   return { h: h.toString().padStart(2, "0"), m: nextM.toString().padStart(2, "0") }
 }
-
 
 export const updateNextInterval = (set) => {
   set((state) => ({

@@ -1,6 +1,8 @@
 import { Store } from '../src/store/store'
 import { Alarm } from '../src/alarm/Alarm'
 import { Todo } from '../src/todo/Todo'
+import { CompletedTasks } from '../src/completedTasks/CompletedTasks'
+
 import './App.css'
 
 export const App = () => {
@@ -13,7 +15,9 @@ export const App = () => {
           <Todo type="weekly" storeLocal={Store().weekly} />
           <Todo type="monthly" storeLocal={Store().monthly} />
         </div>
-        <div className='right'>TASKS</div>
+        <div className='right'>
+          <CompletedTasks storeLocal={Store().tasks}/>
+        </div>
       </div>
     </div>
   )

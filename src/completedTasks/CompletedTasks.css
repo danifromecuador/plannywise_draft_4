@@ -1,0 +1,27 @@
+.CompletedTasks .dones {
+  color: gray;
+}
+
+.CompletedTasks .btn-input {
+  display: flex;
+  align-items: center;
+}
+
+.CompletedTasks .interval-input {
+  width: 100%;
+  border: 1px solid gray;
+  border-radius: 0.5rem;
+  padding: 5px;
+  display: flex;
+  align-items: center;
+}
+
+.CompletedTasks .interval-input span {
+  width: 165px;
+  color: gray;
+}
+
+.CompletedTasks input {
+  border: none;
+  width: 100%;
+}

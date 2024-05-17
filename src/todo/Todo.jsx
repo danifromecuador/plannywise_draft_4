@@ -8,7 +8,7 @@ export const Todo = ({ type, storeLocal }) => {
   const [hide1, setHide1] = useState("")
   let todosSize = storeLocal.todos.length + storeLocal.dones.length
   let completed = parseInt((storeLocal.dones.length / (storeLocal.todos.length + storeLocal.dones.length)) * 100)
-  const handleEnter = e => e.key === "Enter" && (storeLocal.addTodo(input), setInput(""))
+  const handleEnter = e => (e.key === "Enter" && input && input[0] !== " ") && (storeLocal.addTodo(input), setInput(""))
 
   useEffect(() => {
     localStorage.setItem("dailyTodos", JSON.stringify(Store.getState().daily.todos))

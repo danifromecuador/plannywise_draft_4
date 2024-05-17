@@ -2,11 +2,12 @@ import { create } from "zustand"
 import { devtools } from "zustand/middleware"
 import { getDateNum, getDateStr, updateTime } from "./time.js"
 import { interval, nextInterval, updateNextInterval, setState } from "./alarm.js"
-import { 
+import {
   dailyAddTodo, dailyMarkTodoAsDone, dailyMarkDoneAsTodo,
   weeklyAddTodo, weeklyMarkTodoAsDone, weeklyMarkDoneAsTodo,
   monthlyAddTodo, monthlyMarkTodoAsDone, monthlyMarkDoneAsTodo,
 } from "./todo.js"
+import { addCompletedTask } from "./tasks.js"
 
 const createTimeSlice = (set) => ({
   num: getDateNum(),
@@ -29,7 +30,7 @@ const createDailyTodoSlice = (set) => ({
   addTodo: (input) => dailyAddTodo(set, input),
   markTodoAsDone: (element) => dailyMarkTodoAsDone(set, element),
   markDoneAsTodo: (element) => dailyMarkDoneAsTodo(set, element),
-  removeAllCompleted: () => set((state)=>({daily:{...state.daily, dones:[]}}))
+  removeAllCompleted: () => set((state) => ({ daily: { ...state.daily, dones: [] } }))
 })
 
 const createWeeklyTodoSlice = (set) => ({
@@ -38,8 +39,8 @@ const createWeeklyTodoSlice = (set) => ({
   addTodo: (input) => weeklyAddTodo(set, input),
   markTodoAsDone: (element) => weeklyMarkTodoAsDone(set, element),
   markDoneAsTodo: (element) => weeklyMarkDoneAsTodo(set, element),
-  removeAllCompleted: () => set((state)=>({weekly:{...state.weekly, dones:[]}}))
-  
+  removeAllCompleted: () => set((state) => ({ weekly: { ...state.weekly, dones: [] } }))
+
 })
 
 const createMonthlyTodoSlice = (set) => ({
@@ -48,7 +49,13 @@ const createMonthlyTodoSlice = (set) => ({
   addTodo: (input) => monthlyAddTodo(set, input),
   markTodoAsDone: (element) => monthlyMarkTodoAsDone(set, element),
   markDoneAsTodo: (element) => monthlyMarkDoneAsTodo(set, element),
-  removeAllCompleted: () => set((state)=>({monthly:{...state.monthly, dones:[]}}))
+  removeAllCompleted: () => set((state) => ({ monthly: { ...state.monthly, dones: [] } }))
+})
+
+const createCompletedTasksSlice = (set) => ({
+  dones: JSON.parse(localStorage.getItem("completedTasks")) || [],
+  addTodo: (interval, input) => addCompletedTask(set, interval, input),
+  removeAllCompleted: () => set((state) => ({ tasks: { ...state.tasks, dones: [] } }))
 })
 
 export const Store = create(devtools((set) => ({
@@ -57,4 +64,5 @@ export const Store = create(devtools((set) => ({
   daily: createDailyTodoSlice(set),
   weekly: createWeeklyTodoSlice(set),
   monthly: createMonthlyTodoSlice(set),
+  tasks: createCompletedTasksSlice(set)
 })))
