@@ -5,23 +5,23 @@
 .CompletedTasks .btn-input {
   display: flex;
   align-items: center;
+  white-space: nowrap;
 }
 
 .CompletedTasks .interval-input {
   width: 100%;
   border: 1px solid gray;
   border-radius: 0.5rem;
-  padding: 5px;
   display: flex;
   align-items: center;
+  column-gap: 1rem;
 }
 
 .CompletedTasks .interval-input span {
-  width: 165px;
   color: gray;
 }
 
 .CompletedTasks input {
   border: none;
   width: 100%;
-}
+} 
