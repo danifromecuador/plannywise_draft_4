@@ -5,19 +5,17 @@ import './Todo.css'
 
 export const Todo = ({ type, storeLocal }) => {
   const [input, setInput] = useState("")
-  const [hide1, setHide1] = useState("")
+  const [hide1, setHide1] = useState(`${JSON.parse(localStorage.getItem(`${type}.hide1`)) || ""}`)
   let todosSize = storeLocal.todos.length + storeLocal.dones.length
   let completed = parseInt((storeLocal.dones.length / (storeLocal.todos.length + storeLocal.dones.length)) * 100)
   const handleEnter = e => (e.key === "Enter" && input && input[0] !== " ") && (storeLocal.addTodo(input), setInput(""))
 
   useEffect(() => {
-    localStorage.setItem("dailyTodos", JSON.stringify(Store.getState().daily.todos))
-    localStorage.setItem("dailyDones", JSON.stringify(Store.getState().daily.dones))
-    localStorage.setItem("weeklyTodos", JSON.stringify(Store.getState().weekly.todos))
-    localStorage.setItem("weeklyDones", JSON.stringify(Store.getState().weekly.dones))
-    localStorage.setItem("monthlyTodos", JSON.stringify(Store.getState().monthly.todos))
-    localStorage.setItem("monthlyDones", JSON.stringify(Store.getState().monthly.dones))
+    localStorage.setItem(`${type}Todos`, JSON.stringify(storeLocal.todos))
+    localStorage.setItem(`${type}Dones`, JSON.stringify(storeLocal.dones))
   }, [storeLocal])
+
+  useEffect(() => localStorage.setItem(`${type}.hide1`, JSON.stringify(hide1)), [hide1])
 
   return (
     <div className='Todo main-component'>
