@@ -10,7 +10,7 @@ export const CompletedTasks = ({ storeLocal }) => {
   const previousIntervalStr = `${previousInterval().hi}:${previousInterval().mi}  -  ${previousInterval().hf}:${previousInterval().mf}`
   let doneSize = storeLocal.dones.length
   let workedHours = doneSize / 4
-  const handleEnter = e => e.key === "Enter" && (storeLocal.addTodo(previousIntervalStr, input), setInput(""))
+  const handleEnter = e => e.key === "Enter" && input && input[0] !== " " && (storeLocal.addTodo(previousIntervalStr, input), setInput(""))
 
   useEffect(() => {
     localStorage.setItem("completedTasks", JSON.stringify(Store.getState().tasks.dones))
@@ -30,7 +30,6 @@ export const CompletedTasks = ({ storeLocal }) => {
       </ul>
       <div className={`btn-input ${hide1}`}>
         <button className='button' onClick={() => storeLocal.removeAllCompleted()}>Delete All Tasks</button>
-
         <div className='interval-input'>
           <span>{previousIntervalStr}</span>
           <input
