@@ -23,8 +23,7 @@ export const Todo = ({ type, storeLocal }) => {
     <div className='Todo main-component'>
       <div className="header">
         <div className={`header-left ${todosSize === 0 ? "hide" : ""}`}>Completed: <span className='completed'>{completed}%</span></div>
-        <div className='header-center' onClick={() => { hide1 === "" ? setHide1("hide") : setHide1("") }}>{type.charAt(0).toUpperCase() + type.slice(1)} Goals</div>
-        <div className="header-right"></div>
+        <div className='header-right' onClick={() => { hide1 === "" ? setHide1("hide") : setHide1("") }}>{type.charAt(0).toUpperCase() + type.slice(1)} Goals</div>
       </div>
       <ul className={`todos-dones secondary-component ${todosSize === 0 ? "hide" : ""} ${hide1}`}>
         {storeLocal.todos.map(e => (
