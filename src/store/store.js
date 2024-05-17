@@ -54,7 +54,7 @@ const createMonthlyTodoSlice = (set) => ({
 
 const createCompletedTasksSlice = (set) => ({
   dones: JSON.parse(localStorage.getItem("completedTasks")) || [],
-  addTodo: (input) => addCompletedTask(set, input),
+  addTodo: (interval, input) => addCompletedTask(set, interval, input),
   removeAllCompleted: () => set((state) => ({ tasks: { ...state.tasks, dones: [] } }))
 })
 
