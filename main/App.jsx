@@ -16,7 +16,7 @@ export const App = () => {
           <Todo type="monthly" storeLocal={Store().monthly} />
         </div>
         <div className='right'>
-          <CompletedTasks storeLocal={Store().tasks}/>
+          <CompletedTasks type="tasks" storeLocal={Store().tasks}/>
         </div>
       </div>
     </div>

@@ -1,6 +1,6 @@
 .App {
-  width: 95vw;
-  height: 95vh;
+  width: 99vw;
+  height: 99vh;
   color: gray;
   background-color: #141325;
   display: flex;
@@ -12,6 +12,7 @@
 .left-right {
   display: flex;
   column-gap: 1rem;
+  row-gap: 1rem;
 }
 
 .left {
@@ -48,9 +49,17 @@
   border: 1px solid gray;
   border-radius: 0.5rem;
   padding: 0.2rem;
-  background-color: #262a15;
+  background-color: #b3b2b2;
   cursor: pointer;
-  color: gray;
+  color: black;
+  white-space: nowrap;
+}
+
+.input {
+  border: 1px solid gray;
+  border-radius: 0.5rem;
+  padding: 0.2rem;
+  color: white !important;
 }
 
 /* HEADER START */
@@ -62,19 +71,18 @@
 }
 
 .header .header-left,
-.header .header-center,
 .header .header-right {
-  width: 33.333%;
+  width: 50%;
 }
 
-.header .header-center,
+.header .header-right,
 .header .header-left .completed {
   font-size: 1.5rem;
   color: white;
 }
 
-.header .header-center {
-  text-align: center;
+.header .header-right {
+  text-align: right;
   cursor: pointer;
 }
 
@@ -86,12 +94,46 @@
 
 @media (width <= 480px) {
   * {
-    font-size: 0.8rem;
+    font-size: 0.8rem !important;
+  }
+
+  .App .left-right {
+    flex-direction: column;
+  }
+
+  .App .left,
+  .App .right {
+    width: 100%;
+  }
+
+  .App .right .CompletedTasks.Todo.main-component .btn-input .interval-input.input {
+    flex-direction: column;
   }
 }
 
-@media (480px < width < 768px) {
+@media (480px < width < 1000px) {
   * {
     font-size: 0.9rem;
+  }
+
+  .App .left-right {
+    flex-direction: column;
+  }
+
+  .App .left,
+  .App .right {
+    width: 100%;
+  }
+}
+
+@media (480px <= width <= 600px) {
+  .App .right .CompletedTasks.Todo.main-component .btn-input .interval-input.input {
+    flex-direction: column;
+  }
+}
+
+@media (1000px <= width < 1200px) {
+  .App .right .CompletedTasks.Todo.main-component .btn-input .interval-input.input {
+    flex-direction: column;
   }
 }

@@ -3,7 +3,3 @@
   align-items: center;
   column-gap: 0.5rem;
 }
-
-.Alarm.main-component > div:first-child .button {
-  min-width: 130px;
-}
