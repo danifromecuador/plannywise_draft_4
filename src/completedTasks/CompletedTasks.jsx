@@ -31,8 +31,7 @@ export const CompletedTasks = ({ storeLocal }) => {
     <div className='CompletedTasks Todo main-component'>
       <div className="header">
         <div className={`header-left ${doneSize === 0 ? "hide" : ""}`}>Worked Hours: <span className='completed'>{workedHours}</span></div>
-        <div className='header-center' onClick={() => { hide1 === "" ? setHide1("hide") : setHide1("") }}>Completed Tasks</div>
-        <div className="header-right"></div>
+        <div className='header-right' onClick={() => { hide1 === "" ? setHide1("hide") : setHide1("") }}>Completed Tasks</div>
       </div>
       <ul className={`todos-dones secondary-component ${doneSize === 0 ? "hide" : ""} ${hide1}`}>
         {storeLocal.dones.map(e => (
