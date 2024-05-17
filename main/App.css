@@ -48,9 +48,13 @@
   border: 1px solid gray;
   border-radius: 0.5rem;
   padding: 0.2rem;
-  background-color: #262a15;
+  background-color: #e7e7e7;
   cursor: pointer;
-  color: gray;
+  color: black;
+}
+
+input {
+  color: white !important;
 }
 
 /* HEADER START */
@@ -62,29 +66,27 @@
 }
 
 .header .header-left,
-.header .header-center,
 .header .header-right {
-  width: 33.333%;
+  width: 50%;
 }
 
-.header .header-center,
+.header .header-right,
 .header .header-left .completed {
   font-size: 1.5rem;
   color: white;
 }
 
-.header .header-center {
-  text-align: center;
+.header .header-right {
+  text-align: right;
   cursor: pointer;
 }
-
 /* HEADER END */
 
 .hide {
   display: none !important;
 }
 
-@media (width <= 480px) {
+@media (width <=480px) {
   * {
     font-size: 0.8rem;
   }
