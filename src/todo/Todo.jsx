@@ -38,7 +38,7 @@ export const Todo = ({ type, storeLocal }) => {
         <input
           type="text"
           placeholder='Type a new goal and press Enter'
-          className='button'
+          className='input'
           value={input}
           onChange={e => setInput(e.target.value)}
           onKeyDown={e => handleEnter(e)}
