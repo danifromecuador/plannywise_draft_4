@@ -18,11 +18,7 @@ export const CompletedTasks = ({ storeLocal }) => {
       if (!input) setWarn1("Type something and then press Enter Key")
       if (input && input[0] == " ") setWarn1("Avoid adding spaces at the start")
       if (input && input[0] !== " " && previousIntervalStr === lastCompletedTaskInterval) setWarn1("Wait until next interval time to add a new completed task")
-      if (input && input[0] !== " " && previousIntervalStr !== lastCompletedTaskInterval) {
-        storeLocal.addTodo(previousIntervalStr, input)
-        setInput("")
-        setWarn1("Completed task was added sucessfully!")
-      }
+      if (input && input[0] !== " " && previousIntervalStr !== lastCompletedTaskInterval) (storeLocal.addTodo(previousIntervalStr, input), setInput(""))
       setTimeout(() => setWarn1(""), 5000)
     }
   }
@@ -45,7 +41,7 @@ export const CompletedTasks = ({ storeLocal }) => {
       </ul>
       <div className="warn1">{warn1}</div>
       <div className={`btn-input ${hide1}`}>
-        <button className='button' onClick={() => storeLocal.removeAllCompleted()}>Delete All Tasks</button>
+        <button className='button' onClick={() => storeLocal.removeAllCompleted()}>Delete All</button>
         <div className='interval-input'>
           <span>{previousIntervalStr}</span>
           <input
