@@ -5,6 +5,7 @@ import { previousInterval } from '../store/alarm';
 import './CompletedTasks.css'
 
 export const CompletedTasks = ({ storeLocal }) => {
+  console.log("CompletedTasks component was rendered");
   const [input, setInput] = useState("")
   const [hide1, setHide1] = useState("")
   const [warn1, setWarn1] = useState("")
@@ -12,20 +13,29 @@ export const CompletedTasks = ({ storeLocal }) => {
   const lastCompletedTaskInterval = storeLocal.dones.length === 0 ? null : storeLocal.dones.at(-1).interval
   let doneSize = storeLocal.dones.length
   let workedHours = doneSize / 4
+  let timeoutId = null
 
   const handleEnter = e => {
     if (e.key === "Enter") {
       if (!input) setWarn1("Type something and then press Enter Key")
       if (input && input[0] == " ") setWarn1("Avoid adding spaces at the start")
-      if (input && input[0] !== " " && previousIntervalStr === lastCompletedTaskInterval) setWarn1("Wait until next interval time to add a new completed task")
-      if (input && input[0] !== " " && previousIntervalStr !== lastCompletedTaskInterval) (storeLocal.addTodo(previousIntervalStr, input), setInput(""))
-      setTimeout(() => setWarn1(""), 5000)
+      if (input && input[0] !== " " && previousIntervalStr === lastCompletedTaskInterval) {
+        setWarn1("Wait until next interval time to add a new completed task")
+      }
+      if (input && input[0] !== " " && previousIntervalStr !== lastCompletedTaskInterval) {
+        storeLocal.addTodo(previousIntervalStr, input)
+        setInput("")
+        setWarn1("")
+      }
     }
   }
 
   useEffect(() => {
-    localStorage.setItem("completedTasks", JSON.stringify(Store.getState().tasks.dones))
-  }, [storeLocal])
+    timeoutId = setTimeout(() => setWarn1(""), 5000)
+    return () => clearTimeout(timeoutId)
+  }, [warn1]);
+
+  useEffect(() => localStorage.setItem("completedTasks", JSON.stringify(storeLocal.dones)), [storeLocal])
 
   return (
     <div className='CompletedTasks Todo main-component'>
@@ -38,7 +48,7 @@ export const CompletedTasks = ({ storeLocal }) => {
           <li key={e.index} className='dones'>{e.interval} {"=>"} {e.content}</li>
         ))}
       </ul>
-      <div className={warn1 === "" && "hide"}>{warn1}</div>
+      <div className={warn1 === "" ? "hide" : ""}>{warn1}</div>
       <div className={`btn-input ${hide1}`}>
         <button className='button' onClick={() => storeLocal.removeAllCompleted()}>Delete All Tasks</button>
         <div className='interval-input input'>
