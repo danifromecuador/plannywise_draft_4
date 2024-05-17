@@ -38,15 +38,15 @@ export const CompletedTasks = ({ storeLocal }) => {
           <li key={e.index} className='dones'>{e.interval} {"=>"} {e.content}</li>
         ))}
       </ul>
-      <div className="warn1">{warn1}</div>
+      <div className={warn1 === "" && "hide"}>{warn1}</div>
       <div className={`btn-input ${hide1}`}>
-        <button className='button' onClick={() => storeLocal.removeAllCompleted()}>Delete All</button>
-        <div className='interval-input'>
+        <button className='button' onClick={() => storeLocal.removeAllCompleted()}>Delete All Tasks</button>
+        <div className='interval-input input'>
           <span>{previousIntervalStr}</span>
           <input
             type="text"
             placeholder='Type a completed task and press Enter'
-            className='button'
+            className='input'
             value={input}
             onChange={e => setInput(e.target.value)}
             onKeyDown={e => handleEnter(e)}
