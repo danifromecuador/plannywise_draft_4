@@ -15,8 +15,8 @@ export const setState = (set) => {
 export const previousInterval = () => {
   let { h, m } = getDateNum()
   let [hi, mi, hf, mf] = [h, 0, h, 0]
-  mi = mf - 15
   mf = m - m % 15
+  mi = mf - 15
   if (mf === 0) {
     mi = 45
     hi -= 1
