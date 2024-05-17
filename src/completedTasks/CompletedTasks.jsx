@@ -3,10 +3,10 @@ import PropTypes from "prop-types";
 import { previousInterval } from '../store/alarm';
 import './CompletedTasks.css'
 
-export const CompletedTasks = ({ storeLocal }) => {
+export const CompletedTasks = ({ type, storeLocal }) => {
   console.log("CompletedTasks component was rendered");
   const [input, setInput] = useState("")
-  const [hide1, setHide1] = useState("")
+  const [hide1, setHide1] = useState(`${JSON.parse(localStorage.getItem(`${type}.hide1`)) || ""}`)
   const [warn1, setWarn1] = useState("")
   const previousIntervalStr = `${previousInterval().hi}:${previousInterval().mi}  -  ${previousInterval().hf}:${previousInterval().mf}`
   const lastCompletedTaskInterval = storeLocal.dones.length === 0 ? null : storeLocal.dones.at(-1).interval
@@ -29,12 +29,14 @@ export const CompletedTasks = ({ storeLocal }) => {
     }
   }
 
+  useEffect(() => localStorage.setItem("completedTasks", JSON.stringify(storeLocal.dones)), [storeLocal])
+
   useEffect(() => {
     timeoutId = setTimeout(() => setWarn1(""), 5000)
     return () => clearTimeout(timeoutId)
   }, [warn1]);
 
-  useEffect(() => localStorage.setItem("completedTasks", JSON.stringify(storeLocal.dones)), [storeLocal])
+  useEffect(() => localStorage.setItem(`${type}.hide1`, JSON.stringify(hide1)), [hide1])
 
   return (
     <div className='CompletedTasks Todo main-component'>
