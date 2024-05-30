@@ -1,7 +1,7 @@
 <a name="readme-top"></a>
 
 <div align="center">
-  <!-- <img src="my_logo.png" alt="logo" width="140"  height="auto" /> -->
+  <img src="public/favicon.png" alt="logo" width="140"  height="auto" />
   <br/>
   <h3><b>README</b></h3>
 </div>
